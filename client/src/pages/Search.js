@@ -25,6 +25,22 @@ class Search extends Component {
         .then(res => this.setState({ booksFound: res.data.items}))
         .then(console.log(this.state.booksFound))
         .catch(err => console.log(err));
+    } else if (!this.state.titleSearch && this.state.authorSearch) {
+      API.searchAuthors(this.state.authorSearch)
+        .then(res => this.setState({ booksFound: res.data.items}))
+        .then(console.log(this.state.booksFound))
+        .catch(err => console.log(err));
+    } else if (this.state.titleSearch && this.state.authorSearch) {
+      API.searchTotal(this.state.authorSearch, this.state.titleSearch)
+        .then(function(res) {
+          if (res !== undefined) {
+            this.setState({ booksFound: res.data.items })
+          } else if (res === undefined) {
+            this.setState({ booksFound: null })
+          }
+        })
+        .then(console.log(this.state.booksFound))
+        .catch(err => console.log(err));
     }
   };
 
@@ -32,11 +48,20 @@ class Search extends Component {
     //event.preventDefault();
     let newState = [...this.state.booksFound];
     let index = newState.indexOf(info)
-    console.log(index);
+    console.log(info);
     if (index > -1) {
       newState.splice(index, 1);
-      this.setState({ booksFound: newState});
     }
+    API.saveBook({
+      title: info.volumeInfo.title,
+      authors: info.volumeInfo.authors,
+      description: info.volumeInfo.description,
+      image: info.volumeInfo.imageLinks.smallThumbnail,
+      link: info.volumeInfo.canonicalVolumeLink,
+      date: info.volumeInfo.publishedDate
+    })
+      .then(this.setState({ booksFound: newState}))
+      .catch(err => console.log(err));
   }
 
   render() {
@@ -63,6 +88,7 @@ class Search extends Component {
                 </div>
                 <button className="btn btn-primary mb-2" disabled={!this.state.titleSearch && !this.state.authorSearch} onClick={this.handleFormSubmit}>Search</button>
               </form>
+              <hr />
               {this.state.booksFound.length ? (
                 <div className="search-results">
                   <ul className="pl-0 list-group mb-4">

@@ -7,7 +7,7 @@ More feature, including account management, to be added soon!
 
 ### Screenshots
 
-![Pic](react-google-books.png)
+![Pic](google-books-saved.png)
 
 ### Search Results
 
@@ -15,5 +15,5 @@ More feature, including account management, to be added soon!
 
 ### Saved Books
 
-![Pic3](google-books-saved.png)
+![Pic3](google-books-saved-two.png)
 

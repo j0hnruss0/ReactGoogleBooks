@@ -5,6 +5,15 @@ This App allows users to search for books via the Google Books API. Saved books 
 
 More feature, including account management, to be added soon!
 
-### 
+### Screenshots
 
 ![Pic](react-google-books.png)
+
+### Search Results
+
+![Pic2](google-books-req.png)
+
+### Saved Books
+
+![Pic3](google-books-saved.png)
+

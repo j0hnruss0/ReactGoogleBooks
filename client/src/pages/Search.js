@@ -26,7 +26,7 @@ class Search extends Component {
         .then(console.log(this.state.booksFound))
         .catch(err => console.log(err));
     } else if (!this.state.titleSearch && this.state.authorSearch) {
-      API.searchAuthors(this.state.authorSearch)
+      API.searchAuthor(this.state.authorSearch)
         .then(res => this.setState({ booksFound: res.data.items}))
         .then(console.log(this.state.booksFound))
         .catch(err => console.log(err));

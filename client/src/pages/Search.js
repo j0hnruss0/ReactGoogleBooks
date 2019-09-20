@@ -32,14 +32,8 @@ class Search extends Component {
         .catch(err => console.log(err));
     } else if (this.state.titleSearch && this.state.authorSearch) {
       API.searchTotal(this.state.authorSearch, this.state.titleSearch)
-        .then(function(res) {
-          if (res !== undefined) {
-            this.setState({ booksFound: res.data.items })
-          } else if (res === undefined) {
-            this.setState({ booksFound: null })
-          }
-        })
-        .then(console.log(this.state.booksFound))
+        .then(res=> this.setState({ booksFound: res.data.items }))
+        .then(console.log(this.state.booksFound)) 
         .catch(err => console.log(err));
     }
   };
